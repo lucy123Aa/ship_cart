@@ -5,7 +5,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { COLORS } from "@/typography/colors";
 
-interface HomeScreenPopularItemsProp {
+interface BestOffersProp {
   id: number;
   image: any;
   title: string;
@@ -13,13 +13,7 @@ interface HomeScreenPopularItemsProp {
   price: string;
 }
 
-function HomeScreenPopularItems({
-  id,
-  image,
-  title,
-  rating,
-  price,
-}: HomeScreenPopularItemsProp) {
+function BestOffers({ id, image, title, rating, price }: BestOffersProp) {
   return (
     <TouchableOpacity key={id} style={styles.popularCard}>
       <Image source={{ uri: image }} style={styles.popularImage} />
@@ -88,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreenPopularItems;
+export default BestOffers;

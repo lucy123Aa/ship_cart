@@ -7,9 +7,9 @@ interface HomeScreenDealCardProp {
   id: number;
   image: any;
   title: string;
-  discount: string;
-  price: string;
-  originalPrice: string;
+  discount?: string;
+  price?: string;
+  originalPrice?: string;
 }
 
 function HomeScreenDealCard({
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   dealCard: {
     width: 160,
   },
- 
+
   discountText: {
     color: "#fff",
     fontSize: 10,

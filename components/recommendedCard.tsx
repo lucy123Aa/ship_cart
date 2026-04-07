@@ -1,5 +1,5 @@
 import { COLORS } from "@/typography/colors";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import {
   Dimensions,
@@ -16,17 +16,19 @@ interface RecommendedCardProps {
   price: string;
   image: string;
   rating: number;
+  off:number
   onPress: () => void;
 }
 
-const RecommendedCard: React.FC<RecommendedCardProps> = ({
+const RecommendedCard = ({
   id,
   title,
   price,
   image,
   rating,
+  off,
   onPress,
-}) => {
+}: RecommendedCardProps) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} key={id}>
       <Image source={{ uri: image }} style={styles.image} />
@@ -34,12 +36,27 @@ const RecommendedCard: React.FC<RecommendedCardProps> = ({
         <Text style={styles.title} numberOfLines={2}>
           {title}
         </Text>
-        <View style={styles.footer}>
-          <Text style={styles.price}>{price} </Text>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 3 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            gap:10
+          }}
+        >
+          <View style={{ flexDirection: "row", gap: 2 }}>
             <AntDesign name="star" size={20} color={COLORS.gold} />
-            <Text style={styles.rating}>{rating}</Text>
+            <AntDesign name="star" size={20} color={COLORS.gold} />
+            <AntDesign name="star" size={20} color={COLORS.gold} />
+            <AntDesign name="star" size={20} color={COLORS.gold} />
+            <AntDesign name="star" size={20} color={COLORS.gold} />
           </View>
+          <Text style={styles.rating}>({rating})</Text>
+        </View>
+        <View style={styles.footer}>
+          <Text style={styles.price}>
+            <MaterialIcons name="currency-pound" size={24} color="black" />
+            {price}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -50,8 +67,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 12,
     padding: 12,
-    marginRight: 12,
-    width: 220,
+    width: 200,
     backgroundColor: COLORS.lightBlue,
     shadowColor: "#000",
     shadowOpacity: 0.05,
@@ -81,7 +97,7 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#2196F3",
+    color: "black",
   },
   rating: {
     fontSize: 12,

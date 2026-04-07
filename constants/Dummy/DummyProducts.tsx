@@ -50,6 +50,14 @@ export const featuredDeals = [
     discount: "38% OFF",
     image: "https://picsum.photos/id/30/200/200",
   },
+  {
+    id: 4,
+    title: "Pizza Combo",
+    price: "$15.99",
+    originalPrice: "$25.99",
+    discount: "38% OFF",
+    image: "https://picsum.photos/id/30/200/200",
+  },
 ];
 
 export const popularItems = [
@@ -165,5 +173,72 @@ export const categories = [
     name: "Gadgets",
     image: gadegets,
     color: "#9B59B6",
+  },
+];
+
+export const recommendedItems = [
+  {
+    id: 1,
+    title: "Wireless Headphones",
+    price: "$89.99",
+    rating: 1234,
+    image: "https://picsum.photos/id/26/200/200",
+    off: 1234,
+  },
+  {
+    id: 2,
+    title: "Smart Watch",
+    price: "$199.99",
+    rating: 1234,
+    image: "https://picsum.photos/id/20/200/200",
+    off: 1234,
+  },
+  {
+    id: 3,
+    title: "Designer Bag",
+    price: "$299.99",
+    rating: 1234,
+    image: "https://picsum.photos/id/21/200/200",
+    off: "123",
+  },
+  {
+    id: 4,
+    title: "Designer Bag",
+    price: "$299.99",
+    rating: 1234,
+    image: "https://picsum.photos/id/21/200/200",
+    off: "123",
+  },
+  {
+    id: 5,
+    title: "Wireless Headphones",
+    price: "$89.99",
+    rating: 1234,
+    image: "https://picsum.photos/id/26/200/200",
+    off: "123",
+  },
+  {
+    id: 6,
+    title: "Smart Watch",
+    price: "$199.99",
+    rating: 1234,
+    image: "https://picsum.photos/id/20/200/200",
+    off: 1234,
+  },
+  {
+    id: 7,
+    title: "Designer Bag",
+    price: "$299.99",
+    rating: 1234,
+    image: "https://picsum.photos/id/21/200/200",
+    off: "123",
+  },
+  {
+    id: 8,
+    title: "Designer Bag",
+    price: "$299.99",
+    rating: 1234,
+    image: "https://picsum.photos/id/21/200/200",
+    off: 1234,
   },
 ];

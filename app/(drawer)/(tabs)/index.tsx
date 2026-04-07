@@ -1,7 +1,7 @@
 import Divider from "@/components/Divider";
 import HeaderImageSection from "@/components/headerImageSection";
 import HomeScreenDealCard from "@/components/homeScreenDealCard";
-import HomeScreenPopularItems from "@/components/homeScreenPopularItems";
+import HomeScreenPopularItems from "@/components/BestOffers";
 import PersonalizeRecommendation from "@/components/personalizeRecommendation";
 import RecommendedCard from "@/components/recommendedCard";
 import { ScrollItems } from "@/components/scrollItams";
@@ -9,6 +9,7 @@ import {
   categories,
   featuredDeals,
   popularItems,
+  recommendedItems,
 } from "@/constants/Dummy/DummyProducts";
 import { COLORS } from "@/typography/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -29,12 +30,20 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerActions } from "@react-navigation/native";
+import BestOffers from "@/components/BestOffers";
+import { Image } from "expo-image";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Mobile");
   const scrollY = useRef(new Animated.Value(0)).current;
+
+  const pumaLogo =
+    "https://companieslogo.com/img/orig/PUM.DE_BIG-3030b719.png?t=1720244493";
+
+  const hpLogo =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgMuHHADrFziUav2SRl02rMVDIOb09Z1jlsQ&s";
 
   const headerOpacity = scrollY.interpolate({
     inputRange: [0, 100],
@@ -159,12 +168,7 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </View>
 
-          <View
-            // horizontal
-            // showsHorizontalScrollIndicator={false}
-            style={styles.dealsSection}
-            // contentContainerStyle={styles.dealsContent}
-          >
+          <View style={styles.dealsSection}>
             {featuredDeals.map((deal) => (
               <HomeScreenDealCard
                 key={deal.id}
@@ -179,74 +183,239 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Popular Items</Text>
-          <TouchableOpacity style={styles.seeAllButton}>
-            <Text style={styles.seeAllText}>View All</Text>
-            <Feather name="chevron-right" size={16} color={COLORS.darkPink} />
-          </TouchableOpacity>
+        <View style={styles.whiteBox}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Best offer for Your Home</Text>
+            <TouchableOpacity style={styles.seeAllButton}>
+              <Text style={styles.seeAllText}>See All</Text>
+              <Feather
+                name="chevron-right"
+                size={16}
+                color={COLORS.lightGreen}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.dealsSection}>
+            {popularItems.map((deal) => (
+              <HomeScreenDealCard
+                key={deal.id}
+                id={deal.id}
+                image={deal.image}
+                title={deal.title}
+                price={deal.price}
+              />
+            ))}
+          </View>
         </View>
 
-        <View style={styles.popularGrid}>
-          {popularItems.map((item) => (
-            <HomeScreenPopularItems
-              key={item.id}
-              id={item.id}
-              image={item.image}
-              title={item.title}
-              price={item.price}
-              rating={item.rating}
-            />
-          ))}
+        <View style={styles.whiteBox}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Trending Text & Gedgets</Text>
+            <TouchableOpacity style={styles.seeAllButton}>
+              <Text style={styles.seeAllText}>See All</Text>
+              <Feather
+                name="chevron-right"
+                size={16}
+                color={COLORS.lightGreen}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.dealsSection}>
+            {featuredDeals.map((deal) => (
+              <HomeScreenDealCard
+                key={deal.id}
+                id={deal.id}
+                image={deal.image}
+                title={deal.title}
+                price={deal.price}
+              />
+            ))}
+          </View>
         </View>
 
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>
-            <AntDesign name="star" size={24} color={COLORS.gold} /> Recommended
-            for you
-          </Text>
-          <TouchableOpacity style={styles.seeAllButton}>
-            <Text style={styles.seeAllText}>View All</Text>
-            <Feather name="chevron-right" size={16} color={COLORS.darkPink} />
-          </TouchableOpacity>
+        <View style={styles.whiteBox}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Outdoor Oasis</Text>
+            <TouchableOpacity style={styles.seeAllButton}>
+              <Text style={styles.seeAllText}>See All</Text>
+              <Feather
+                name="chevron-right"
+                size={16}
+                color={COLORS.lightGreen}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.dealsSection}>
+            {featuredDeals.map((deal) => (
+              <HomeScreenDealCard
+                key={deal.id}
+                id={deal.id}
+                image={deal.image}
+                title={deal.title}
+                price={deal.price}
+              />
+            ))}
+          </View>
         </View>
 
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{ paddingBottom: 10 }}
-          contentContainerStyle={styles.dealsContent}
-        >
-          {popularItems.map((item) => (
-            <RecommendedCard
-              key={item.id}
-              id={item.id}
-              image={item.image}
-              title={item.title}
-              price={item.price}
-              rating={item.rating}
-              onPress={() => {}}
-            />
-          ))}
-        </ScrollView>
+        <View style={styles.whiteBox}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
+            <TouchableOpacity style={styles.seeAllButton}>
+              <Text style={styles.seeAllText}>See All</Text>
+              <Feather
+                name="chevron-right"
+                size={16}
+                color={COLORS.lightGreen}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.dealsSection}>
+            {featuredDeals.map((deal) => (
+              <HomeScreenDealCard
+                key={deal.id}
+                id={deal.id}
+                image={deal.image}
+                discount={deal.discount}
+                title={deal.title}
+                price={deal.price}
+                originalPrice={deal.originalPrice}
+              />
+            ))}
+          </View>
+        </View>
 
         <PersonalizeRecommendation />
 
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>
-            <AntDesign name="star" size={24} color={COLORS.gold} /> Best Sellers
-            in Gamers
-          </Text>
-          <TouchableOpacity style={styles.seeAllButton}>
-            <Text style={styles.seeAllText}>View All</Text>
-            <Feather name="chevron-right" size={16} color={COLORS.darkPink} />
-          </TouchableOpacity>
+        <View style={styles.whiteBox}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
+            <TouchableOpacity style={styles.seeAllButton}>
+              <Text style={styles.seeAllText}>See All</Text>
+              <Feather
+                name="chevron-right"
+                size={16}
+                color={COLORS.lightGreen}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.dealsSection}>
+            {featuredDeals.map((deal) => (
+              <HomeScreenDealCard
+                key={deal.id}
+                id={deal.id}
+                image={deal.image}
+                discount={deal.discount}
+                title={deal.title}
+                price={deal.price}
+                originalPrice={deal.originalPrice}
+              />
+            ))}
+          </View>
+        </View>
+
+        <View
+          style={[
+            styles.whiteBox,
+            { paddingHorizontal: 10, paddingVertical: 20 },
+          ]}
+        >
+          <Text style={styles.sectionTitle}>Shop from Top Brands</Text>
+
+          <Animated.ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.logoSection}
+          >
+            <BrandLogos image={hpLogo} />
+            <BrandLogos image={hpLogo} />
+            <BrandLogos image={hpLogo} />
+            <BrandLogos image={hpLogo} />
+            <BrandLogos image={hpLogo} />
+            <BrandLogos image={hpLogo} />
+          </Animated.ScrollView>
+        </View>
+
+        <View style={styles.whiteBox}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
+            <TouchableOpacity style={styles.seeAllButton}>
+              <Text style={styles.seeAllText}>See All</Text>
+              <Feather
+                name="chevron-right"
+                size={16}
+                color={COLORS.lightGreen}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.dealsSection}>
+            {featuredDeals.map((deal) => (
+              <HomeScreenDealCard
+                key={deal.id}
+                id={deal.id}
+                image={deal.image}
+                discount={deal.discount}
+                title={deal.title}
+                price={deal.price}
+                originalPrice={deal.originalPrice}
+              />
+            ))}
+          </View>
+        </View>
+
+        <View style={styles.whiteBox}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>
+              <AntDesign name="star" size={24} color={COLORS.gold} /> Best
+              Sellers in Gamers
+            </Text>
+            <TouchableOpacity style={styles.seeAllButton}>
+              <Text style={styles.seeAllText}>View All</Text>
+              <Feather
+                name="chevron-right"
+                size={16}
+                color={COLORS.lightGreen}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <Animated.ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ gap: 10 }}
+          >
+            {recommendedItems.map((deal) => (
+              <RecommendedCard
+                key={deal.id}
+                id={deal.id}
+                image={deal.image}
+                title={deal.title}
+                price={deal.price}
+                rating={deal.rating}
+                off={deal.off}
+                onPress={() => {}}
+              />
+            ))}
+          </Animated.ScrollView>
         </View>
       </Animated.ScrollView>
     </>
   );
 }
 
+const BrandLogos = ({ image }: { image: any }) => {
+  return (
+    <View style={styles.logoBox}>
+      <Image source={{ uri: image }} style={styles.logoImage} />
+    </View>
+  );
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -322,6 +491,31 @@ const styles = StyleSheet.create({
   categoriesContent: {
     paddingHorizontal: 16,
     gap: 16,
+  },
+
+  logoSection: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 45,
+    marginTop: 10,
+  },
+
+  logoBox: {
+    backgroundColor: "black",
+    height: 80,
+    width: 80,
+    borderRadius: 100,
+    padding: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  logoImage: {
+    height: "80%",
+    width: "80%",
+    resizeMode: "contain",
+    borderRadius: 50,
   },
 
   sectionHeader: {
