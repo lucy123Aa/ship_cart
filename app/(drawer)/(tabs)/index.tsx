@@ -385,6 +385,7 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </View>
 
+
           <Animated.ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
