@@ -16,7 +16,7 @@ interface RecommendedCardProps {
   price: string;
   image: string;
   rating: number;
-  off:number
+  off: number;
   onPress: () => void;
 }
 
@@ -40,7 +40,7 @@ const RecommendedCard = ({
           style={{
             flexDirection: "row",
             alignItems: "center",
-            gap:10
+            gap: 10,
           }}
         >
           <View style={{ flexDirection: "row", gap: 2 }}>
@@ -53,10 +53,15 @@ const RecommendedCard = ({
           <Text style={styles.rating}>({rating})</Text>
         </View>
         <View style={styles.footer}>
-          <Text style={styles.price}>
-            <MaterialIcons name="currency-pound" size={24} color="black" />
-            {price}
-          </Text>
+          <View style={styles.priceSection}>
+            <MaterialIcons name="currency-pound" size={18} color="black" />
+            <Text style={styles.price}>{price}</Text>
+          </View>
+          <View style={styles.offSection}>
+            <MaterialIcons name="currency-pound" size={12} color="gray" />
+            <Text style={styles.off}>{off}</Text>
+            <View style={styles.strike} />
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -68,11 +73,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 12,
     width: 200,
-    backgroundColor: COLORS.lightBlue,
+    backgroundColor: "white",
     shadowColor: "#000",
-    shadowOpacity: 0.05,
+    shadowOpacity: 0.8,
     shadowRadius: 10,
     elevation: 3,
+    // marginBottom: 5,
   },
   image: {
     width: "100%",
@@ -91,13 +97,38 @@ const styles = StyleSheet.create({
   },
   footer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 4,
+    // borderWidth: 1,
+    marginTop: 8,
+  },
+  priceSection: {
+    flexDirection: "row",
     alignItems: "center",
   },
   price: {
     fontSize: 16,
     fontWeight: "bold",
     color: "black",
+  },
+
+  offSection: {
+    flexDirection: "row",
+    alignItems: "center",
+    position: "relative",
+  },
+
+  off: {
+    fontSize: 13,
+    color: "gray",
+  },
+
+  strike: {
+    position: "absolute",
+    height: 1,
+    backgroundColor: "gray",
+    width: "100%",
+    top: "45%",
   },
   rating: {
     fontSize: 12,

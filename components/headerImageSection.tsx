@@ -1,22 +1,39 @@
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Animated from "react-native-reanimated";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import React, { useState } from "react";
 
-function HeaderImageSection() {
-  const modalImage =
-    "https://img.freepik.com/free-photo/fashionable-pale-brunette-long-green-dress-black-jacket-sunglasses-standing-street-daytime-against-wall-light-city-building_197531-24468.jpg?semt=ais_incoming&w=740&q=80";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Dimensions,
+} from "react-native";
+import { MotiView } from "moti";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { FontAwesome6 } from "@expo/vector-icons";
+
+const { width } = Dimensions.get("window");
+
+interface HeaderImageSectionProp {
+  image: any;
+  des: string;
+}
+
+function HeaderImageSection({ image, des }: HeaderImageSectionProp) {
+  const [liked, setLiked] = useState(false);
 
   return (
     <View style={styles.heroWrapper}>
-      <Image source={modalImage} style={styles.heroImage} />
+      <Image source={{ uri: image }} style={styles.heroImage} />
       <LinearGradient
         colors={["rgba(0,0,0,0.8)", "rgba(0,0,0,0.5)", "rgba(0,0,0,0.4)"]}
         style={styles.heroOverlay}
       >
-        <Animated.View
+        <MotiView
+          from={{ opacity: 0, translateY: 50 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          transition={{ type: "timing", duration: 500 }}
           style={[
             styles.imageSection,
             {
@@ -25,22 +42,32 @@ function HeaderImageSection() {
             },
           ]}
         >
-          <Text style={styles.heroTitle}>Get an </Text>
+          <Text style={styles.heroTitle}>{des}</Text>
+        </MotiView>
 
-          <View
-            style={{
-              borderBottomWidth: 2,
-              borderColor: "white",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Text style={styles.heroTitle}>extra </Text>
-            <MaterialIcons name="currency-pound" size={40} color="white" />
-            <Text style={styles.heroTitle}>20 </Text>
-          </View>
-          <Text style={styles.heroTitle}>this Black Friday.</Text>
-        </Animated.View>
+        <TouchableOpacity
+          onPress={() => setLiked(!liked)}
+          style={{
+            backgroundColor: "white",
+            padding: 8,
+            transform: [{ rotate: "-40deg" }],
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 8,
+            position: "absolute",
+            top: "40%",
+            left: 20,
+          }}
+        >
+          <FontAwesome6
+            name="heart"
+            size={24}
+            color={liked ? "black" : "black"}
+            style={{ transform: [{ rotate: "40deg" }] }}
+            solid={liked}
+          />
+        </TouchableOpacity>
       </LinearGradient>
     </View>
   );
@@ -50,7 +77,8 @@ const styles = StyleSheet.create({
   heroWrapper: {
     height: 200,
     position: "relative",
-    marginBottom:5
+    marginBottom: 5,
+    width: 380,
   },
   heroImage: {
     width: "100%",
@@ -62,16 +90,19 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: "100%",
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
 
   imageSection: {
-    padding: 24,
+    marginBottom: 10,
   },
 
   heroTitle: {
     color: "#fff",
-    fontSize: 42,
+    fontSize: 35,
     fontWeight: "bold",
+    textAlign: "center",
   },
 });
 

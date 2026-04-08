@@ -1,0 +1,20 @@
+export const AccordionData = [
+  {
+    id: 1,
+    title: "Fruits",
+    icon: "food-apple",
+    items: ["Apple", "Banana", "Orange"],
+  },
+  {
+    id: 2,
+    title: "Vegetables",
+    icon: "carrot",
+    items: ["Carrot", "Potato", "Tomato"],
+  },
+  {
+    id: 3,
+    title: "Drinks",
+    icon: "cup",
+    items: ["Water", "Juice", "Soda"],
+  },
+];
