@@ -2,6 +2,8 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Accordion from "@/components/Accordion";
 import {
+  FashionItemsData,
+  FurnitureItemsData,
   KidsItemsData,
   MobileItemsData,
 } from "@/constants/Dummy/AccordionData";
@@ -16,7 +18,7 @@ import {
   View,
 } from "react-native";
 
-export default function Kids() {
+export default function Furniture() {
   const router = useRouter();
 
   return (
@@ -36,12 +38,12 @@ export default function Kids() {
           >
             <MaterialCommunityIcons name="arrow-left" size={24} color="black" />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Kids</Text>
+          <Text style={styles.headerTitle}>Furniture</Text>
         </View>
         <View style={styles.container}>
           <View style={styles.topSection}></View>
           <View style={styles.bottomSection}>
-            <Accordion data={KidsItemsData} />
+            <Accordion data={FurnitureItemsData} />
           </View>
         </View>
       </SafeAreaView>

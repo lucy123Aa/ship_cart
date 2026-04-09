@@ -11,25 +11,23 @@ import {
 } from "@expo/vector-icons";
 import { COLORS } from "@/typography/colors";
 import Divider from "./Divider";
+import { useRouter } from "expo-router";
 
 export default function CustomDrawer(props: any) {
+  const router = useRouter();
   return (
     <DrawerContentScrollView
       {...props}
       style={{}}
       showsVerticalScrollIndicator={false}
     >
-      <TouchableOpacity
-        onPress={() => props.navigation.closeDrawer()}
-        style={{ flexDirection: "row", gap: 20, alignItems: "center" }}
-      >
-        <MaterialCommunityIcons name="arrow-left" size={24} color="black" />
-        <Text style={{ fontSize: 18, fontWeight: "600", color: "black" }}>
-          Menu
-        </Text>
-      </TouchableOpacity>
+      <View style={styles.backBtnSection}>
+        <TouchableOpacity onPress={() => props.navigation.closeDrawer()}>
+          <MaterialCommunityIcons name="arrow-left" size={24} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Menu</Text>
+      </View>
 
-      <Divider />
       {/* ===== SHOP SECTION ===== */}
       <DrawerRow
         label="Best Sellers"
@@ -49,7 +47,7 @@ export default function CustomDrawer(props: any) {
 
       <DrawerRow
         label="Today's discount"
-        onPress={() => props.navigation.navigate("trendingItems")}
+        onPress={() => props.navigation.navigate("todayDiscount")}
         icon={({ color }: any) => (
           <MaterialIcons name="discount" size={24} color={color} />
         )}
@@ -72,6 +70,14 @@ export default function CustomDrawer(props: any) {
       />
 
       <DrawerRow
+        label="Fashion"
+        onPress={() => props.navigation.navigate("fashion")}
+        icon={({ color }: any) => (
+          <Ionicons name="bag-outline" size={24} color={color} />
+        )}
+      />
+
+      <DrawerRow
         label="Kids"
         onPress={() => props.navigation.navigate("kids")}
         icon={({ color }: any) => (
@@ -88,10 +94,10 @@ export default function CustomDrawer(props: any) {
       />
 
       <DrawerRow
-        label="Fashion"
-        onPress={() => props.navigation.navigate("fashion")}
+        label="Furniture"
+        onPress={() => props.navigation.navigate("furniture")}
         icon={({ color }: any) => (
-          <Ionicons name="bag-outline" size={24} color={color} />
+          <Ionicons name="home-outline" size={24} color={color} />
         )}
       />
 
@@ -178,6 +184,16 @@ export default function CustomDrawer(props: any) {
 }
 
 const styles = StyleSheet.create({
+  backBtnSection: {
+    flexDirection: "row",
+    gap: 20,
+    alignItems: "center",
+    paddingVertical: 10,
+    borderBottomWidth: 1.5,
+    borderBottomColor: COLORS.border,
+    paddingHorizontal: 10,
+  },
+  headerTitle: { fontSize: 18, fontWeight: "600", color: "black" },
   sectionTitle: {
     marginTop: 20,
     marginLeft: 16,
@@ -206,7 +222,7 @@ const DrawerRow = ({ label, onPress, icon }: any) => {
       onPress={onPress}
       icon={icon}
       label={({ color }) => (
-        <TouchableOpacity
+        <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
@@ -220,7 +236,7 @@ const DrawerRow = ({ label, onPress, icon }: any) => {
             size={20}
             color={color}
           />
-        </TouchableOpacity>
+        </View>
       )}
     />
   );

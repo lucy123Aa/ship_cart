@@ -1,12 +1,70 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Accordion from "@/components/Accordion";
+import {
+  FashionItemsData,
+  KidsItemsData,
+  MobileItemsData,
+} from "@/constants/Dummy/AccordionData";
+import { COLORS } from "@/typography/colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-function Kitchen() {
+export default function Kitchen() {
+  const router = useRouter();
+
   return (
-    <View>
-      <Text> Kitchen</Text>
-    </View>
+    <>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
+
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.backBtnSection}>
+          <TouchableOpacity
+            onPress={() => {
+              router.back();
+            }}
+          >
+            <MaterialCommunityIcons name="arrow-left" size={24} color="black" />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Kitchen</Text>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.topSection}></View>
+          <View style={styles.bottomSection}>
+            <Accordion data={KidsItemsData} />
+          </View>
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 
-export default Kitchen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 15,
+  },
+  backBtnSection: {
+    flexDirection: "row",
+    gap: 20,
+    alignItems: "center",
+    paddingVertical: 10,
+    borderBottomWidth: 1.5,
+    borderBottomColor: COLORS.border,
+    paddingHorizontal: 10,
+  },
+  headerTitle: { fontSize: 18, fontWeight: "600", color: "black" },
+  topSection: {},
+  bottomSection: {},
+});
