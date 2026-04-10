@@ -12,6 +12,12 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+const yellowFrame = require("../../assets/images/yellowFrame.png");
+
+import Samsung from "../../assets/svg/samsung.svg";
+import Dyson from "../../assets/svg/dyson.svg";
+import Bose from "../../assets/svg/bose.svg";
+import { Image } from "expo-image";
 
 function TrendingItems() {
   const router = useRouter();
@@ -24,7 +30,7 @@ function TrendingItems() {
         backgroundColor="transparent"
       />
 
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
         <View style={styles.backBtnSection}>
           <TouchableOpacity
             onPress={() => {
@@ -36,7 +42,24 @@ function TrendingItems() {
           <Text style={styles.headerTitle}>Trending Items</Text>
         </View>
         <View style={styles.container}>
-          <View style={styles.topSection}></View>
+          <View style={styles.topSection}>
+            <Samsung width={"45%"} height={45} />
+            <Dyson width={"45%"} height={45} />
+            <Bose width={"45%"} height={45} />
+            <Samsung width={"45%"} height={45} />
+          </View>
+
+          <View style={{ height: 150, width: 350 }}>
+            <Image
+              source={yellowFrame}
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: 5,
+                resizeMode: "cover",
+              }}
+            />
+          </View>
           <View style={styles.bottomSection}>
             <Accordion data={AccordionTrendingItemsData} />
           </View>
@@ -63,6 +86,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   headerTitle: { fontSize: 18, fontWeight: "600", color: "black" },
-  topSection: {},
+  topSection: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: 35,
+    marginBottom: 30,
+    marginTop: 20,
+  },
   bottomSection: {},
 });

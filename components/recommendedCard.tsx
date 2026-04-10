@@ -14,7 +14,7 @@ interface RecommendedCardProps {
   id: number;
   title: string;
   price: string;
-  image: string;
+  image: any;
   rating: number;
   off: number;
   onPress: () => void;
@@ -31,7 +31,7 @@ const RecommendedCard = ({
 }: RecommendedCardProps) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} key={id}>
-      <Image source={{ uri: image }} style={styles.image} />
+      <Image source={image} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.title} numberOfLines={2}>
           {title}
@@ -72,19 +72,20 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 12,
     padding: 12,
-    width: 200,
+    width: 250,
     backgroundColor: "white",
     shadowColor: "#000",
     shadowOpacity: 0.8,
     shadowRadius: 10,
-    elevation: 3,
+    elevation: 2,
     // marginBottom: 5,
   },
   image: {
     width: "100%",
-    height: 180,
+    height: 200,
     borderRadius: 8,
     marginBottom: 8,
+    resizeMode: "cover",
   },
   content: {
     flex: 1,

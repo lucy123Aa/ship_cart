@@ -17,6 +17,11 @@ import {
   View,
 } from "react-native";
 
+import Zara from "../../assets/svg/zara.svg";
+import Puma from "../../assets/svg/puma.svg";
+import Fossil from "../../assets/svg/fossil_logo.svg";
+import Levis from "../../assets/svg/levis.svg";
+
 export default function Fashion() {
   const router = useRouter();
 
@@ -28,7 +33,7 @@ export default function Fashion() {
         backgroundColor="transparent"
       />
 
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
         <View style={styles.backBtnSection}>
           <TouchableOpacity
             onPress={() => {
@@ -40,7 +45,12 @@ export default function Fashion() {
           <Text style={styles.headerTitle}>Fashion</Text>
         </View>
         <View style={styles.container}>
-          <View style={styles.topSection}></View>
+          <View style={styles.topSection}>
+            <Svg Icon={Levis} />
+            <Svg Icon={Puma} />
+            <Svg Icon={Zara} />
+            <Svg Icon={Fossil} />
+          </View>
           <View style={styles.bottomSection}>
             <Accordion data={FashionItemsData} />
           </View>
@@ -49,6 +59,10 @@ export default function Fashion() {
     </>
   );
 }
+
+const Svg = ({ Icon }: { Icon: any }) => {
+  return <Icon width={"40%"} height={45} />;
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -65,6 +79,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   headerTitle: { fontSize: 18, fontWeight: "600", color: "black" },
-  topSection: {},
+  topSection: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: 45,
+    marginBottom: 30,
+    marginTop: 20,
+  },
   bottomSection: {},
 });

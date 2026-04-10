@@ -1,12 +1,24 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { COLORS } from "@/typography/colors";
+import { StatusBar, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-function Categories() {
+export default function Categories() {
   return (
-    <View>
-      <Text>categories </Text>
-    </View>
+    <>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
+
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
+        <View>
+          <Text>Categories </Text>
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 
-export default Categories;
+const styles = StyleSheet.create({});

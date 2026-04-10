@@ -21,15 +21,16 @@ export const ScrollItems = ({
       <View
         style={[
           styles.categoryIconContainer,
-          { backgroundColor: isSelected ? color : `${color}20` },
+          { backgroundColor: "white" },
           isSelected && styles.selectedCategory,
         ]}
       >
         <Image
-          source={{ uri: image }}
+          source={image}
           style={{
-            width: 40,
-            height: 40,
+            width: 50,
+            height: 50,
+            borderRadius: 30,
             resizeMode: "contain",
           }}
         />

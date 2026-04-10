@@ -16,6 +16,11 @@ import {
   View,
 } from "react-native";
 
+import Nike from "../../assets/svg/nike.svg";
+import Lego from "../../assets/svg/lego.svg";
+import Crayola from "../../assets/svg/crayola.svg";
+import Jhonson from "../../assets/svg/jhonson.svg";
+
 export default function Kids() {
   const router = useRouter();
 
@@ -27,7 +32,7 @@ export default function Kids() {
         backgroundColor="transparent"
       />
 
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
         <View style={styles.backBtnSection}>
           <TouchableOpacity
             onPress={() => {
@@ -39,7 +44,12 @@ export default function Kids() {
           <Text style={styles.headerTitle}>Kids</Text>
         </View>
         <View style={styles.container}>
-          <View style={styles.topSection}></View>
+          <View style={styles.topSection}>
+            <Svg Icon={Nike} />
+            <Svg Icon={Lego} />
+            <Svg Icon={Crayola} />
+            <Svg Icon={Jhonson} />
+          </View>
           <View style={styles.bottomSection}>
             <Accordion data={KidsItemsData} />
           </View>
@@ -48,6 +58,10 @@ export default function Kids() {
     </>
   );
 }
+
+const Svg = ({ Icon }: { Icon: any }) => {
+  return <Icon width={"40%"} height={45} />;
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -64,6 +78,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   headerTitle: { fontSize: 18, fontWeight: "600", color: "black" },
-  topSection: {},
+  topSection: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: 45,
+    marginBottom: 30,
+    marginTop: 20,
+  },
   bottomSection: {},
 });

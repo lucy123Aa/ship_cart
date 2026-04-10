@@ -12,6 +12,8 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Tcl from "../../assets/svg/tcl.svg";
+import Jbl from "../../assets/svg/jbl.svg";
 
 function TodayDiscount() {
   const router = useRouter();
@@ -24,7 +26,7 @@ function TodayDiscount() {
         backgroundColor="transparent"
       />
 
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
         <View style={styles.backBtnSection}>
           <TouchableOpacity
             onPress={() => {
@@ -36,7 +38,10 @@ function TodayDiscount() {
           <Text style={styles.headerTitle}>Todays Discount</Text>
         </View>
         <View style={styles.container}>
-          <View style={styles.topSection}></View>
+          <View style={styles.topSection}>
+            <Tcl width={"35%"} height={35} />
+            <Jbl width={"35%"} height={35} />
+          </View>
           <View style={styles.bottomSection}>
             <Accordion data={TodayDiscountItemsData} />
           </View>
@@ -63,6 +68,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   headerTitle: { fontSize: 18, fontWeight: "600", color: "black" },
-  topSection: {},
+  topSection: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: 35,
+    marginBottom: 30,
+    marginTop: 20,
+  },
   bottomSection: {},
 });

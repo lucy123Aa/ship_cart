@@ -13,6 +13,10 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import Lg_electronics from "../../assets/svg/lg_electronics.svg";
+import Panasonic from "../../assets/svg/panasonic.svg";
+import Apple from "../../assets/svg/apple.svg";
+
 function BestSellers() {
   const router = useRouter();
 
@@ -24,7 +28,7 @@ function BestSellers() {
         backgroundColor="transparent"
       />
 
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
         <View style={styles.backBtnSection}>
           <TouchableOpacity
             onPress={() => {
@@ -36,7 +40,12 @@ function BestSellers() {
           <Text style={styles.headerTitle}>Best Sellers</Text>
         </View>
         <View style={styles.container}>
-          <View style={styles.topSection}></View>
+          <View style={styles.topSection}>
+            <Lg_electronics width={"45%"} height={45} />
+            <Panasonic width={"45%"} height={45} />
+            <Apple width={"45%"} height={45} />
+          </View>
+
           <View style={styles.bottomSection}>
             <Accordion data={AccordionBestSellerData} />
           </View>
@@ -63,6 +72,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   headerTitle: { fontSize: 18, fontWeight: "600", color: "black" },
-  topSection: {},
+  topSection: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: 35,
+    marginBottom: 30,
+    marginTop:20
+  },
   bottomSection: {},
 });

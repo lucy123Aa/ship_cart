@@ -18,9 +18,13 @@ import {
   View,
 } from "react-native";
 
+import Hallmark_logo from "../../assets/svg/Hallmark_logo.svg";
+import Xbox from "../../assets/svg/xbox.svg";
+import { Image } from "expo-image";
+
 export default function Gifts() {
   const router = useRouter();
-
+  const saleImage = require("../../assets/images/sale_50_Frame.png");
   return (
     <>
       <StatusBar
@@ -29,7 +33,7 @@ export default function Gifts() {
         backgroundColor="transparent"
       />
 
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
         <View style={styles.backBtnSection}>
           <TouchableOpacity
             onPress={() => {
@@ -41,7 +45,12 @@ export default function Gifts() {
           <Text style={styles.headerTitle}>Gifts</Text>
         </View>
         <View style={styles.container}>
-          <View style={styles.topSection}></View>
+          <View style={styles.topSection}>
+            <Hallmark_logo width={"30%"} height={45} />
+            <Xbox width={"30%"} height={45} />
+          </View>
+
+          <Image source={saleImage} style={styles.saleImage} />
           <View style={styles.bottomSection}>
             <Accordion data={GiftsItemsData} />
           </View>
@@ -66,6 +75,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   headerTitle: { fontSize: 18, fontWeight: "600", color: "black" },
-  topSection: {},
+  topSection: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    rowGap: 45,
+    marginBottom: 30,
+    marginTop: 20,
+  },
+  saleImage: { width: "auto", height: 130, resizeMode: "contain" },
   bottomSection: {},
 });

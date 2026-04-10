@@ -13,6 +13,9 @@ import {
   View,
 } from "react-native";
 
+import Android_logo from "../../assets/svg/android_logo.svg";
+import Enk from "../../assets/svg/enk.svg";
+
 export default function Mobiles() {
   const router = useRouter();
 
@@ -24,7 +27,7 @@ export default function Mobiles() {
         backgroundColor="transparent"
       />
 
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
         <View style={styles.backBtnSection}>
           <TouchableOpacity
             onPress={() => {
@@ -36,7 +39,13 @@ export default function Mobiles() {
           <Text style={styles.headerTitle}>Mobiles</Text>
         </View>
         <View style={styles.container}>
-          <View style={styles.topSection}></View>
+          <View style={styles.topSection}>
+            <View style={styles.topSection}>
+              <Android_logo width={"45%"} height={25} />
+              <Android_logo width={"45%"} height={25} />
+              <Enk width={"45%"} height={30} />
+            </View>
+          </View>
           <View style={styles.bottomSection}>
             <Accordion data={MobileItemsData} />
           </View>
@@ -61,6 +70,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   headerTitle: { fontSize: 18, fontWeight: "600", color: "black" },
-  topSection: {},
+  topSection: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: 35,
+    marginBottom: 20,
+    marginTop: 20,
+  },
   bottomSection: {},
 });

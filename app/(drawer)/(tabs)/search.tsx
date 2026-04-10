@@ -1,11 +1,23 @@
+import { COLORS } from "@/typography/colors";
 import React from "react";
-import { Text, View } from "react-native";
+import { StatusBar, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function Search() {
   return (
-    <View>
-      <Text>Search </Text>
-    </View>
+    <>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
+
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
+        <View>
+          <Text>Search </Text>
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 

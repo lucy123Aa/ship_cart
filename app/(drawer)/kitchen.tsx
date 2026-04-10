@@ -17,6 +17,10 @@ import {
   View,
 } from "react-native";
 
+import Tefal from "../../assets/svg/tefal.svg";
+import Whirlpool from "../../assets/svg/whirpool.svg";
+import Corelle from "../../assets/svg/corelle.svg";
+
 export default function Kitchen() {
   const router = useRouter();
 
@@ -28,7 +32,7 @@ export default function Kitchen() {
         backgroundColor="transparent"
       />
 
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
         <View style={styles.backBtnSection}>
           <TouchableOpacity
             onPress={() => {
@@ -40,7 +44,11 @@ export default function Kitchen() {
           <Text style={styles.headerTitle}>Kitchen</Text>
         </View>
         <View style={styles.container}>
-          <View style={styles.topSection}></View>
+          <View style={styles.topSection}>
+            <Svg Icon={Tefal} />
+            <Svg Icon={Whirlpool} />
+            <Svg Icon={Corelle} />
+          </View>
           <View style={styles.bottomSection}>
             <Accordion data={KidsItemsData} />
           </View>
@@ -49,6 +57,10 @@ export default function Kitchen() {
     </>
   );
 }
+
+const Svg = ({ Icon }: { Icon: any }) => {
+  return <Icon width={"40%"} height={45} />;
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -65,6 +77,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   headerTitle: { fontSize: 18, fontWeight: "600", color: "black" },
-  topSection: {},
+  topSection: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: 45,
+    marginBottom: 30,
+    marginTop: 20,
+  },
   bottomSection: {},
 });

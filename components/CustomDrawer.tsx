@@ -57,7 +57,7 @@ export default function CustomDrawer(props: any) {
         label="Mobile"
         onPress={() => props.navigation.navigate("mobiles")}
         icon={({ color }: any) => (
-          <AntDesign name="mobile" size={24} color="black" />
+          <AntDesign name="mobile" size={24} color={color} />
         )}
       />
 
@@ -221,6 +221,7 @@ const DrawerRow = ({ label, onPress, icon }: any) => {
     <DrawerItem
       onPress={onPress}
       icon={icon}
+      inactiveTintColor="gray"
       label={({ color }) => (
         <View
           style={{

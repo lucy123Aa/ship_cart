@@ -22,7 +22,7 @@ function HomeScreenDealCard({
 }: HomeScreenDealCardProp) {
   return (
     <TouchableOpacity key={id} style={styles.dealCard}>
-      <Image source={{ uri: image }} style={styles.dealImage} />
+      <Image source={image} style={styles.dealImage} />
       <Text style={styles.dealTitle}>{title}</Text>
     </TouchableOpacity>
   );
@@ -40,15 +40,17 @@ const styles = StyleSheet.create({
   },
   dealImage: {
     width: "100%",
-    height: 180,
+    height: 150,
     borderRadius: 12,
     marginBottom: 8,
+    resizeMode: "cover",
   },
   dealTitle: {
     fontSize: 14,
     fontWeight: "600",
     color: "#1a1a1a",
     marginBottom: 4,
+    textAlign:'center'
   },
   priceContainer: {
     flexDirection: "row",

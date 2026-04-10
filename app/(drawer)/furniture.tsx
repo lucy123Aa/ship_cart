@@ -18,6 +18,10 @@ import {
   View,
 } from "react-native";
 
+import Ikea from "../../assets/svg/ikea.svg";
+import Serta from "../../assets/svg/Serta.svg";
+import Steelcase from "../../assets/svg/steelcase.svg";
+
 export default function Furniture() {
   const router = useRouter();
 
@@ -29,7 +33,7 @@ export default function Furniture() {
         backgroundColor="transparent"
       />
 
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
         <View style={styles.backBtnSection}>
           <TouchableOpacity
             onPress={() => {
@@ -41,7 +45,11 @@ export default function Furniture() {
           <Text style={styles.headerTitle}>Furniture</Text>
         </View>
         <View style={styles.container}>
-          <View style={styles.topSection}></View>
+          <View style={styles.topSection}>
+            <Ikea width={"30%"} height={45} />
+            <Serta width={"50%"} height={60} />
+            <Svg Icon={Steelcase} />
+          </View>
           <View style={styles.bottomSection}>
             <Accordion data={FurnitureItemsData} />
           </View>
@@ -50,6 +58,10 @@ export default function Furniture() {
     </>
   );
 }
+
+const Svg = ({ Icon }: { Icon: any }) => {
+  return <Icon width={"35%"} height={55} />;
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -66,6 +78,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   headerTitle: { fontSize: 18, fontWeight: "600", color: "black" },
-  topSection: {},
+  topSection: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: 45,
+    marginBottom: 30,
+    marginTop: 20,
+  },
   bottomSection: {},
 });

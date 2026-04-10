@@ -1,13 +1,23 @@
-import { Image } from "expo-image";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { COLORS } from "@/typography/colors";
+import React from "react";
+import { StatusBar, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Explore() {
   return (
-    <ScrollView>
-      <View>
-        <Text>explore</Text>
-      </View>
-    </ScrollView>
+    <>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
+
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
+        <View>
+          <Text>Explore </Text>
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 

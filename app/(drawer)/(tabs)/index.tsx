@@ -5,11 +5,15 @@ import HomeScreenPopularItems from "@/components/BestOffers";
 import PersonalizeRecommendation from "@/components/personalizeRecommendation";
 import RecommendedCard from "@/components/recommendedCard";
 import { ScrollItems } from "@/components/scrollItams";
+
 import {
+  bestOfferForHome,
   categories,
   featuredDeals,
+  outdoorOasis,
   popularItems,
   recommendedItems,
+  trendingGedgets,
 } from "@/constants/Dummy/DummyProducts";
 import { COLORS } from "@/typography/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -34,11 +38,17 @@ import { DrawerActions } from "@react-navigation/native";
 import BestOffers from "@/components/BestOffers";
 import { Image } from "expo-image";
 import { MotiView } from "moti";
-import Accordion from "@/components/Accordion";
-import { AccordionData } from "../../../constants/Dummy/AccordionData";
+import ShipCartLogo from "../../../assets/svg/shipCart_logo.svg";
+import hpLogo from "../../../assets/svg/hpLogo.svg";
+import pumaLogo from "../../../assets/svg/pumaLogo.svg";
+import addidasLogo from "../../../assets/svg/addidasLogo.svg";
+import nikeelogo from "../../../assets/svg/nikeLogo.svg";
+import asusLogo from "../../../assets/svg/asusLogo.svg";
+import samsungLogo from "../../../assets/svg/samsungLogo.svg";
+import appleLogo from "../../../assets/svg/appleLogo.svg";
+import googleLogo from "../../../assets/svg/googleLogo.svg";
 
 const { width } = Dimensions.get("window");
-const CARD_WIDTH = width * 0.9;
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -47,14 +57,15 @@ export default function HomeScreen() {
   const scrollY = useRef(new Animated.Value(0)).current;
   const [index, setIndex] = useState(0);
 
-  const pumaLogo =
-    "https://companieslogo.com/img/orig/PUM.DE_BIG-3030b719.png?t=1720244493";
-
-  const hpLogo =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgMuHHADrFziUav2SRl02rMVDIOb09Z1jlsQ&s";
-
   const modalImage =
     "https://img.freepik.com/free-photo/fashionable-pale-brunette-long-green-dress-black-jacket-sunglasses-standing-street-daytime-against-wall-light-city-building_197531-24468.jpg?semt=ais_incoming&w=740&q=80";
+
+  const banner = require("../../../assets/images/banner.png");
+  const banner1 = require("../../../assets/images/banner1.png");
+  const banner2 = require("../../../assets/images/banner2.png");
+  const haha = require("../../../assets/images/haha.png");
+  const yellowFrame = require("../../../assets/images/yellowFrame.png");
+  const cyber_monday_super_frame = require("../../../assets/images/cyber_monday_super_frame.jpg");
 
   const headerOpacity = scrollY.interpolate({
     inputRange: [0, 100],
@@ -87,7 +98,12 @@ export default function HomeScreen() {
               style={styles.iconButton}
               onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
             >
-              <Feather name="menu" size={24} color="#1a1a1a" />
+              <View
+                style={{ flexDirection: "row", gap: 10, alignItems: "center" }}
+              >
+                <Feather name="menu" size={24} color="#1a1a1a" />
+                <ShipCartLogo width={140} height={50} />
+              </View>
             </TouchableOpacity>
             <View style={styles.headerRight}>
               <TouchableOpacity style={styles.iconButton}>
@@ -143,18 +159,9 @@ export default function HomeScreen() {
               gap: 0.2,
             }}
           >
-            <HeaderImageSection
-              image={modalImage}
-              des="Get an extra 20 this Black Friday"
-            />
-            <HeaderImageSection
-              image={modalImage}
-              des="Get a kids' table tablet."
-            />
-            <HeaderImageSection
-              image={modalImage}
-              des="Watches that know when it's time to go"
-            />
+            <HeaderImageSection image={banner} />
+            <HeaderImageSection image={banner1} />
+            <HeaderImageSection image={banner2} />
           </ScrollView>
 
           <View style={styles.dotsContainer}>
@@ -171,6 +178,7 @@ export default function HomeScreen() {
             ))}
           </View>
         </View>
+
         {/* Categories Section */}
         <ScrollView
           horizontal
@@ -222,7 +230,7 @@ export default function HomeScreen() {
           </View>
 
           <View style={styles.dealsSection}>
-            {popularItems.map((deal) => (
+            {bestOfferForHome.map((deal) => (
               <HomeScreenDealCard
                 key={deal.id}
                 id={deal.id}
@@ -242,7 +250,7 @@ export default function HomeScreen() {
           </View>
 
           <View style={styles.dealsSection}>
-            {featuredDeals.map((deal) => (
+            {trendingGedgets.map((deal) => (
               <HomeScreenDealCard
                 key={deal.id}
                 id={deal.id}
@@ -253,6 +261,7 @@ export default function HomeScreen() {
             ))}
           </View>
         </View>
+
         <View style={styles.whiteBox}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Outdoor Oasis</Text>
@@ -262,7 +271,7 @@ export default function HomeScreen() {
           </View>
 
           <View style={styles.dealsSection}>
-            {featuredDeals.map((deal) => (
+            {outdoorOasis.map((deal) => (
               <HomeScreenDealCard
                 key={deal.id}
                 id={deal.id}
@@ -284,7 +293,7 @@ export default function HomeScreen() {
         >
           <View style={{ height: 200, width: 350 }}>
             <Image
-              source={modalImage}
+              source={haha}
               style={{
                 width: "100%",
                 height: "100%",
@@ -295,18 +304,7 @@ export default function HomeScreen() {
           </View>
           <View style={{ height: 200, width: 350 }}>
             <Image
-              source={modalImage}
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: 5,
-                resizeMode: "cover",
-              }}
-            />
-          </View>
-          <View style={{ height: 200, width: 350 }}>
-            <Image
-              source={modalImage}
+              source={yellowFrame}
               style={{
                 width: "100%",
                 height: "100%",
@@ -347,7 +345,7 @@ export default function HomeScreen() {
 
           <Animated.ScrollView
             horizontal
-            showsHorizontalScrollIndicator={false}
+            // showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ gap: 15 }}
           >
             {recommendedItems.map((deal) => (
@@ -386,9 +384,9 @@ export default function HomeScreen() {
             ))}
           </View>
         </View>
-        <View style={{ width: 370, height: 200, marginHorizontal: "auto" }}>
+        <View style={{ width: 370, height: 300, marginHorizontal: "auto" }}>
           <Image
-            source={modalImage}
+            source={cyber_monday_super_frame}
             style={{
               width: "100%",
               height: "100%",
@@ -432,12 +430,14 @@ export default function HomeScreen() {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.logoSection}
           >
-            <BrandLogos image={hpLogo} />
-            <BrandLogos image={hpLogo} />
-            <BrandLogos image={hpLogo} />
-            <BrandLogos image={hpLogo} />
-            <BrandLogos image={hpLogo} />
-            <BrandLogos image={hpLogo} />
+            <BrandLogos Logo={hpLogo} />
+            <BrandLogos Logo={pumaLogo} />
+            <BrandLogos Logo={addidasLogo} />
+            <BrandLogos Logo={nikeelogo} />
+            <BrandLogos Logo={asusLogo} />
+            <BrandLogos Logo={samsungLogo} />
+            <BrandLogos Logo={appleLogo} />
+            <BrandLogos Logo={googleLogo} />
           </Animated.ScrollView>
         </View>
         <View style={styles.whiteBox}>
@@ -495,18 +495,19 @@ export default function HomeScreen() {
   );
 }
 
-const BrandLogos = ({ image }: { image: any }) => {
+const BrandLogos = ({ Logo }: { Logo: any }) => {
   return (
     <View style={styles.logoBox}>
-      <Image source={{ uri: image }} style={styles.logoImage} />
+      <Logo width={"100%"} height={"100%"} />
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f9fa",
-    paddingHorizontal: 5,
+    backgroundColor: COLORS.background,
+    // paddingHorizontal: 5,
     marginHorizontal: "auto",
   },
   headerSection: {
@@ -521,7 +522,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 16,
     borderColor: "red",
   },
   iconButton: {
@@ -545,7 +545,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E5E7EB",
     borderRadius: 12,
     paddingHorizontal: 12,
-    height: 48,
+    height: 40,
     gap: 8,
   },
   searchInput: {
@@ -603,20 +603,12 @@ const styles = StyleSheet.create({
   },
 
   logoBox: {
-    backgroundColor: "#123490",
     height: 80,
     width: 80,
-    borderRadius: 100,
-    padding: 5,
+    borderRadius: 50,
+    overflow: "hidden",
     justifyContent: "center",
     alignItems: "center",
-  },
-
-  logoImage: {
-    height: "80%",
-    width: "80%",
-    resizeMode: "contain",
-    borderRadius: 50,
   },
 
   sectionHeader: {
