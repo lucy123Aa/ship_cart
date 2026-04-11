@@ -2,18 +2,12 @@ import { Tabs } from "expo-router";
 import React from "react";
 
 import { HapticTab } from "@/components/haptic-tab";
-import { IconSymbol } from "@/components/ui/icon-symbol";
-import { Colors } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
-import {
-  Feather,
-  MaterialIcons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
+import Categories from "@/assets/svg/Categories";
+import Home from "@/assets/svg/Home";
+import Search from "@/assets/svg/search";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
@@ -39,7 +33,7 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+            <Home width={24} height={24} color={color} />
           ),
         }}
       />
@@ -48,7 +42,7 @@ export default function TabLayout() {
         options={{
           title: "Search",
           tabBarIcon: ({ color }) => (
-            <Feather name="search" size={28} color={color} />
+            <Search width={24} height={24} color={color} />
           ),
         }}
       />
@@ -57,7 +51,7 @@ export default function TabLayout() {
         options={{
           title: "Explore",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
+            <FontAwesome5 name="compass" size={24} color={color} />
           ),
         }}
       />
@@ -67,7 +61,7 @@ export default function TabLayout() {
         options={{
           title: "Categories",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="category" size={28} color={color} />
+            <Categories width={20} height={20} color={color} />
           ),
         }}
       />

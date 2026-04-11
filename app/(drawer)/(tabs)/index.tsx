@@ -47,6 +47,8 @@ import asusLogo from "../../../assets/svg/asusLogo.svg";
 import samsungLogo from "../../../assets/svg/samsungLogo.svg";
 import appleLogo from "../../../assets/svg/appleLogo.svg";
 import googleLogo from "../../../assets/svg/googleLogo.svg";
+import Header from "@/components/Header";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 
@@ -56,9 +58,6 @@ export default function HomeScreen() {
   const [selectedCategory, setSelectedCategory] = useState("Mobile");
   const scrollY = useRef(new Animated.Value(0)).current;
   const [index, setIndex] = useState(0);
-
-  const modalImage =
-    "https://img.freepik.com/free-photo/fashionable-pale-brunette-long-green-dress-black-jacket-sunglasses-standing-street-daytime-against-wall-light-city-building_197531-24468.jpg?semt=ais_incoming&w=740&q=80";
 
   const banner = require("../../../assets/images/banner.png");
   const banner1 = require("../../../assets/images/banner1.png");
@@ -81,416 +80,376 @@ export default function HomeScreen() {
         backgroundColor="transparent"
       />
 
-      <Animated.ScrollView
-        showsVerticalScrollIndicator={false}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: true },
-        )}
-        scrollEventThrottle={16}
-        style={styles.container}
-      >
-        <Animated.View
-          style={[styles.headerSection, { opacity: headerOpacity }]}
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
+        <Animated.ScrollView
+          showsVerticalScrollIndicator={false}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true },
+          )}
+          scrollEventThrottle={16}
+          style={styles.container}
         >
-          <View style={styles.headerTop}>
-            <TouchableOpacity
-              style={styles.iconButton}
-              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+          <Header />
+          <View
+            style={{
+              width: 380,
+              marginHorizontal: "auto",
+            }}
+          >
+            <ScrollView
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
+              onMomentumScrollEnd={(e) => {
+                const newIndex = Math.round(
+                  e.nativeEvent.contentOffset.x / width,
+                );
+                setIndex(newIndex);
+              }}
+              contentContainerStyle={{
+                gap: 0.2,
+              }}
             >
-              <View
-                style={{ flexDirection: "row", gap: 10, alignItems: "center" }}
-              >
-                <Feather name="menu" size={24} color="#1a1a1a" />
-                <ShipCartLogo width={140} height={50} />
-              </View>
-            </TouchableOpacity>
-            <View style={styles.headerRight}>
-              <TouchableOpacity style={styles.iconButton}>
-                <Feather name="shopping-cart" size={24} color="black" />
-              </TouchableOpacity>
+              <HeaderImageSection image={banner} />
+              <HeaderImageSection image={banner1} />
+              <HeaderImageSection image={banner2} />
+            </ScrollView>
+
+            <View style={styles.dotsContainer}>
+              {[0, 1, 2].map((i) => (
+                <MotiView
+                  key={i}
+                  animate={{
+                    width: index === i ? 8 : 8,
+                    opacity: index === i ? 1 : 0.4,
+                  }}
+                  transition={{ type: "timing", duration: 300 }}
+                  style={styles.dot}
+                />
+              ))}
             </View>
           </View>
 
-          <View style={styles.searchSection}>
-            <View style={styles.searchBar}>
-              <Feather name="search" size={20} color="#6a6868" />
-              <TextInput
-                placeholder="Search your item here"
-                placeholderTextColor="#999"
-                style={styles.searchInput}
-                value={searchText}
-                onChangeText={setSearchText}
-              />
-              {searchText.length > 0 && (
-                <TouchableOpacity onPress={() => setSearchText("")}>
-                  <Ionicons name="close-circle" size={20} color="#999" />
-                </TouchableOpacity>
-              )}
-            </View>
-          </View>
-
-          <Divider />
-          {/* Delivery Info */}
-          <View style={styles.deliveryItem}>
-            <Ionicons name="location-outline" size={16} color="black" />
-            <Text style={styles.deliveryText}>
-              Location: 17 Waverley Crescent, Middleham
-            </Text>
-          </View>
-        </Animated.View>
-        <View
-          style={{
-            width: 380,
-            marginHorizontal: "auto",
-          }}
-        >
+          {/* Categories Section */}
           <ScrollView
             horizontal
-            pagingEnabled
             showsHorizontalScrollIndicator={false}
-            onMomentumScrollEnd={(e) => {
-              const newIndex = Math.round(
-                e.nativeEvent.contentOffset.x / width,
-              );
-              setIndex(newIndex);
-            }}
-            contentContainerStyle={{
-              gap: 0.2,
-            }}
+            style={styles.whiteBox}
+            contentContainerStyle={styles.categoriesContent}
           >
-            <HeaderImageSection image={banner} />
-            <HeaderImageSection image={banner1} />
-            <HeaderImageSection image={banner2} />
+            {categories.map((category) => (
+              <ScrollItems
+                key={category.id}
+                title={category.name}
+                image={category.image}
+                color={category.color}
+                isSelected={selectedCategory === category.name}
+                onPress={() => setSelectedCategory(category.name)}
+              />
+            ))}
           </ScrollView>
 
-          <View style={styles.dotsContainer}>
-            {[0, 1, 2].map((i) => (
-              <MotiView
-                key={i}
-                animate={{
-                  width: index === i ? 8 : 8,
-                  opacity: index === i ? 1 : 0.4,
-                }}
-                transition={{ type: "timing", duration: 300 }}
-                style={styles.dot}
-              />
-            ))}
-          </View>
-        </View>
+          {/* Top Deals Section */}
+          <View style={styles.whiteBox}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
+              <TouchableOpacity style={styles.seeAllButton}>
+                <Text style={styles.seeAllText}>See All</Text>
+              </TouchableOpacity>
+            </View>
 
-        {/* Categories Section */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={styles.whiteBox}
-          contentContainerStyle={styles.categoriesContent}
-        >
-          {categories.map((category) => (
-            <ScrollItems
-              key={category.id}
-              title={category.name}
-              image={category.image}
-              color={category.color}
-              isSelected={selectedCategory === category.name}
-              onPress={() => setSelectedCategory(category.name)}
-            />
-          ))}
-        </ScrollView>
+            <View style={styles.dealsSection}>
+              {featuredDeals.map((deal) => (
+                <HomeScreenDealCard
+                  key={deal.id}
+                  id={deal.id}
+                  image={deal.image}
+                  discount={deal.discount}
+                  title={deal.title}
+                  price={deal.price}
+                  originalPrice={deal.originalPrice}
+                />
+              ))}
+            </View>
+          </View>
+          <View style={styles.whiteBox}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Best offer for Your Home</Text>
+              <TouchableOpacity style={styles.seeAllButton}>
+                <Text style={styles.seeAllText}>See All</Text>
+              </TouchableOpacity>
+            </View>
 
-        {/* Top Deals Section */}
-        <View style={styles.whiteBox}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
-            <TouchableOpacity style={styles.seeAllButton}>
-              <Text style={styles.seeAllText}>See All</Text>
-            </TouchableOpacity>
+            <View style={styles.dealsSection}>
+              {bestOfferForHome.map((deal) => (
+                <HomeScreenDealCard
+                  key={deal.id}
+                  id={deal.id}
+                  image={deal.image}
+                  title={deal.title}
+                  price={deal.price}
+                />
+              ))}
+            </View>
           </View>
+          <View style={styles.whiteBox}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Trending Text & Gedgets</Text>
+              <TouchableOpacity style={styles.seeAllButton}>
+                <Text style={styles.seeAllText}>See All</Text>
+              </TouchableOpacity>
+            </View>
 
-          <View style={styles.dealsSection}>
-            {featuredDeals.map((deal) => (
-              <HomeScreenDealCard
-                key={deal.id}
-                id={deal.id}
-                image={deal.image}
-                discount={deal.discount}
-                title={deal.title}
-                price={deal.price}
-                originalPrice={deal.originalPrice}
-              />
-            ))}
-          </View>
-        </View>
-        <View style={styles.whiteBox}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Best offer for Your Home</Text>
-            <TouchableOpacity style={styles.seeAllButton}>
-              <Text style={styles.seeAllText}>See All</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.dealsSection}>
-            {bestOfferForHome.map((deal) => (
-              <HomeScreenDealCard
-                key={deal.id}
-                id={deal.id}
-                image={deal.image}
-                title={deal.title}
-                price={deal.price}
-              />
-            ))}
-          </View>
-        </View>
-        <View style={styles.whiteBox}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Trending Text & Gedgets</Text>
-            <TouchableOpacity style={styles.seeAllButton}>
-              <Text style={styles.seeAllText}>See All</Text>
-            </TouchableOpacity>
+            <View style={styles.dealsSection}>
+              {trendingGedgets.map((deal) => (
+                <HomeScreenDealCard
+                  key={deal.id}
+                  id={deal.id}
+                  image={deal.image}
+                  title={deal.title}
+                  price={deal.price}
+                />
+              ))}
+            </View>
           </View>
 
-          <View style={styles.dealsSection}>
-            {trendingGedgets.map((deal) => (
-              <HomeScreenDealCard
-                key={deal.id}
-                id={deal.id}
-                image={deal.image}
-                title={deal.title}
-                price={deal.price}
-              />
-            ))}
-          </View>
-        </View>
+          <View style={styles.whiteBox}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Outdoor Oasis</Text>
+              <TouchableOpacity style={styles.seeAllButton}>
+                <Text style={styles.seeAllText}>See All</Text>
+              </TouchableOpacity>
+            </View>
 
-        <View style={styles.whiteBox}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Outdoor Oasis</Text>
-            <TouchableOpacity style={styles.seeAllButton}>
-              <Text style={styles.seeAllText}>See All</Text>
-            </TouchableOpacity>
+            <View style={styles.dealsSection}>
+              {outdoorOasis.map((deal) => (
+                <HomeScreenDealCard
+                  key={deal.id}
+                  id={deal.id}
+                  image={deal.image}
+                  title={deal.title}
+                  price={deal.price}
+                />
+              ))}
+            </View>
           </View>
-
-          <View style={styles.dealsSection}>
-            {outdoorOasis.map((deal) => (
-              <HomeScreenDealCard
-                key={deal.id}
-                id={deal.id}
-                image={deal.image}
-                title={deal.title}
-                price={deal.price}
-              />
-            ))}
-          </View>
-        </View>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            gap: 15,
-            paddingHorizontal: 8,
-            marginVertical: 8,
-          }}
-        >
-          <View style={{ height: 200, width: 350 }}>
-            <Image
-              source={haha}
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: 5,
-                resizeMode: "cover",
-              }}
-            />
-          </View>
-          <View style={{ height: 200, width: 350 }}>
-            <Image
-              source={yellowFrame}
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: 5,
-                resizeMode: "cover",
-              }}
-            />
-          </View>
-        </ScrollView>
-        <View style={styles.whiteBox}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
-            <TouchableOpacity style={styles.seeAllButton}>
-              <Text style={styles.seeAllText}>See All</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.dealsSection}>
-            {featuredDeals.map((deal) => (
-              <HomeScreenDealCard
-                key={deal.id}
-                id={deal.id}
-                image={deal.image}
-                discount={deal.discount}
-                title={deal.title}
-                price={deal.price}
-                originalPrice={deal.originalPrice}
-              />
-            ))}
-          </View>
-        </View>
-        <View style={[styles.whiteBox, { paddingTop: 20, paddingBottom: 0 }]}>
-          <Text
-            style={[styles.sectionTitle, { marginBottom: 10, marginLeft: 10 }]}
-          >
-            Recommended for you
-          </Text>
-
-          <Animated.ScrollView
+          <ScrollView
             horizontal
-            // showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ gap: 15 }}
-          >
-            {recommendedItems.map((deal) => (
-              <RecommendedCard
-                key={deal.id}
-                id={deal.id}
-                image={deal.image}
-                title={deal.title}
-                price={deal.price}
-                rating={deal.rating}
-                off={deal.off}
-                onPress={() => {}}
-              />
-            ))}
-          </Animated.ScrollView>
-        </View>
-        <View style={styles.whiteBox}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
-            <TouchableOpacity style={styles.seeAllButton}>
-              <Text style={styles.seeAllText}>See All</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.dealsSection}>
-            {featuredDeals.map((deal) => (
-              <HomeScreenDealCard
-                key={deal.id}
-                id={deal.id}
-                image={deal.image}
-                discount={deal.discount}
-                title={deal.title}
-                price={deal.price}
-                originalPrice={deal.originalPrice}
-              />
-            ))}
-          </View>
-        </View>
-        <View style={{ width: 370, height: 300, marginHorizontal: "auto" }}>
-          <Image
-            source={cyber_monday_super_frame}
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: 5,
-              resizeMode: "cover",
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              gap: 15,
+              paddingHorizontal: 8,
+              marginVertical: 8,
             }}
-          />
-        </View>
-        <View style={styles.whiteBox}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
-            <TouchableOpacity style={styles.seeAllButton}>
-              <Text style={styles.seeAllText}>See All</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.dealsSection}>
-            {featuredDeals.map((deal) => (
-              <HomeScreenDealCard
-                key={deal.id}
-                id={deal.id}
-                image={deal.image}
-                discount={deal.discount}
-                title={deal.title}
-                price={deal.price}
-                originalPrice={deal.originalPrice}
-              />
-            ))}
-          </View>
-        </View>
-        <View
-          style={[
-            styles.whiteBox,
-            { paddingHorizontal: 10, paddingVertical: 20 },
-          ]}
-        >
-          <Text style={styles.sectionTitle}>Shop from Top Brands</Text>
-
-          <Animated.ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.logoSection}
           >
-            <BrandLogos Logo={hpLogo} />
-            <BrandLogos Logo={pumaLogo} />
-            <BrandLogos Logo={addidasLogo} />
-            <BrandLogos Logo={nikeelogo} />
-            <BrandLogos Logo={asusLogo} />
-            <BrandLogos Logo={samsungLogo} />
-            <BrandLogos Logo={appleLogo} />
-            <BrandLogos Logo={googleLogo} />
-          </Animated.ScrollView>
-        </View>
-        <View style={styles.whiteBox}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
-            <TouchableOpacity style={styles.seeAllButton}>
-              <Text style={styles.seeAllText}>See All</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.dealsSection}>
-            {featuredDeals.map((deal) => (
-              <HomeScreenDealCard
-                key={deal.id}
-                id={deal.id}
-                image={deal.image}
-                discount={deal.discount}
-                title={deal.title}
-                price={deal.price}
-                originalPrice={deal.originalPrice}
+            <View style={{ height: 200, width: 350 }}>
+              <Image
+                source={haha}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 5,
+                  resizeMode: "cover",
+                }}
               />
-            ))}
-          </View>
-        </View>
-        <View style={[styles.whiteBox, { paddingTop: 20, paddingBottom: 0 }]}>
-          <Text
-            style={[styles.sectionTitle, { marginBottom: 10, marginLeft: 10 }]}
-          >
-            <AntDesign name="star" size={24} color={COLORS.gold} /> Best Sellers
-            in Gamers
-          </Text>
-
-          <Animated.ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ gap: 15 }}
-          >
-            {recommendedItems.map((deal) => (
-              <RecommendedCard
-                key={deal.id}
-                id={deal.id}
-                image={deal.image}
-                title={deal.title}
-                price={deal.price}
-                rating={deal.rating}
-                off={deal.off}
-                onPress={() => {}}
+            </View>
+            <View style={{ height: 200, width: 350 }}>
+              <Image
+                source={yellowFrame}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 5,
+                  resizeMode: "cover",
+                }}
               />
-            ))}
-          </Animated.ScrollView>
-        </View>
-        <PersonalizeRecommendation />
-      </Animated.ScrollView>
+            </View>
+          </ScrollView>
+          <View style={styles.whiteBox}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
+              <TouchableOpacity style={styles.seeAllButton}>
+                <Text style={styles.seeAllText}>See All</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.dealsSection}>
+              {featuredDeals.map((deal) => (
+                <HomeScreenDealCard
+                  key={deal.id}
+                  id={deal.id}
+                  image={deal.image}
+                  discount={deal.discount}
+                  title={deal.title}
+                  price={deal.price}
+                  originalPrice={deal.originalPrice}
+                />
+              ))}
+            </View>
+          </View>
+          <View style={[styles.whiteBox, { paddingTop: 20, paddingBottom: 0 }]}>
+            <Text
+              style={[
+                styles.sectionTitle,
+                { marginBottom: 10, marginLeft: 10 },
+              ]}
+            >
+              Recommended for you
+            </Text>
+
+            <Animated.ScrollView
+              horizontal
+              // showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ gap: 15 }}
+            >
+              {recommendedItems.map((deal) => (
+                <RecommendedCard
+                  key={deal.id}
+                  id={deal.id}
+                  image={deal.image}
+                  title={deal.title}
+                  price={deal.price}
+                  rating={deal.rating}
+                  off={deal.off}
+                  onPress={() => {}}
+                />
+              ))}
+            </Animated.ScrollView>
+          </View>
+          <View style={styles.whiteBox}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
+              <TouchableOpacity style={styles.seeAllButton}>
+                <Text style={styles.seeAllText}>See All</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.dealsSection}>
+              {featuredDeals.map((deal) => (
+                <HomeScreenDealCard
+                  key={deal.id}
+                  id={deal.id}
+                  image={deal.image}
+                  discount={deal.discount}
+                  title={deal.title}
+                  price={deal.price}
+                  originalPrice={deal.originalPrice}
+                />
+              ))}
+            </View>
+          </View>
+          <View style={{ width: 370, height: 300, marginHorizontal: "auto" }}>
+            <Image
+              source={cyber_monday_super_frame}
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: 5,
+                resizeMode: "cover",
+              }}
+            />
+          </View>
+          <View style={styles.whiteBox}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
+              <TouchableOpacity style={styles.seeAllButton}>
+                <Text style={styles.seeAllText}>See All</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.dealsSection}>
+              {featuredDeals.map((deal) => (
+                <HomeScreenDealCard
+                  key={deal.id}
+                  id={deal.id}
+                  image={deal.image}
+                  discount={deal.discount}
+                  title={deal.title}
+                  price={deal.price}
+                  originalPrice={deal.originalPrice}
+                />
+              ))}
+            </View>
+          </View>
+          <View
+            style={[
+              styles.whiteBox,
+              { paddingHorizontal: 10, paddingVertical: 20 },
+            ]}
+          >
+            <Text style={styles.sectionTitle}>Shop from Top Brands</Text>
+
+            <Animated.ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.logoSection}
+            >
+              <BrandLogos Logo={hpLogo} />
+              <BrandLogos Logo={pumaLogo} />
+              <BrandLogos Logo={addidasLogo} />
+              <BrandLogos Logo={nikeelogo} />
+              <BrandLogos Logo={asusLogo} />
+              <BrandLogos Logo={samsungLogo} />
+              <BrandLogos Logo={appleLogo} />
+              <BrandLogos Logo={googleLogo} />
+            </Animated.ScrollView>
+          </View>
+          <View style={styles.whiteBox}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Top Deals in Fashion</Text>
+              <TouchableOpacity style={styles.seeAllButton}>
+                <Text style={styles.seeAllText}>See All</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.dealsSection}>
+              {featuredDeals.map((deal) => (
+                <HomeScreenDealCard
+                  key={deal.id}
+                  id={deal.id}
+                  image={deal.image}
+                  discount={deal.discount}
+                  title={deal.title}
+                  price={deal.price}
+                  originalPrice={deal.originalPrice}
+                />
+              ))}
+            </View>
+          </View>
+          <View style={[styles.whiteBox, { paddingTop: 20, paddingBottom: 0 }]}>
+            <Text
+              style={[
+                styles.sectionTitle,
+                { marginBottom: 10, marginLeft: 10 },
+              ]}
+            >
+              <AntDesign name="star" size={24} color={COLORS.gold} /> Best
+              Sellers in Gamers
+            </Text>
+
+            <Animated.ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ gap: 15 }}
+            >
+              {recommendedItems.map((deal) => (
+                <RecommendedCard
+                  key={deal.id}
+                  id={deal.id}
+                  image={deal.image}
+                  title={deal.title}
+                  price={deal.price}
+                  rating={deal.rating}
+                  off={deal.off}
+                  onPress={() => {}}
+                />
+              ))}
+            </Animated.ScrollView>
+          </View>
+          <PersonalizeRecommendation />
+        </Animated.ScrollView>
+      </SafeAreaView>
     </>
   );
 }
