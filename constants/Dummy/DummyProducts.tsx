@@ -27,6 +27,7 @@ const chairCushion = require("../../assets/images/chairCushion.jpg");
 const moonLamp = require("../../assets/images/moonLamp.jpg");
 const wirelessBuds = require("../../assets/images/wirelessBuds.jpg");
 const astronautMiniFigures = require("../../assets/images/astronautMiniFigures.jpg");
+const account_product = require("../../assets/images/account_product.png");
 
 export const featuredDeals = [
   {
@@ -308,5 +309,228 @@ export const recommendedItems = [
     rating: 1723,
     image: astronautMiniFigures,
     off: 999.0,
+  },
+];
+
+export const accountCategories = [
+  {
+    id: 1,
+    title: "Women Wrist Watch",
+    price: "$999",
+    originalPrice: "$1199",
+    discount: "20% OFF",
+    image: womenWristWatch,
+  },
+  {
+    id: 2,
+    title: "Door Rugs",
+    price: "$120",
+    originalPrice: "$180",
+    discount: "33% OFF",
+    image: doorRugs,
+  },
+  {
+    id: 3,
+    title: "Kitchen knife sets",
+    price: "$15.99",
+    originalPrice: "$25.99",
+    discount: "38% OFF",
+    image: kitchenKnifeSets,
+  },
+  {
+    id: 4,
+    title: "adapters lamps",
+    price: "$15.99",
+    originalPrice: "$25.99",
+    discount: "38% OFF",
+    image: adaptersLamps,
+  },
+  {
+    id: 5,
+    title: "humidity makers",
+    price: "$15.99",
+    originalPrice: "$25.99",
+    discount: "38% OFF",
+    image: humidityMakers,
+  },
+  {
+    id: 6,
+    title: "mobile holder",
+    price: "$15.99",
+    originalPrice: "$25.99",
+    discount: "38% OFF",
+    image: mobileHolder,
+  },
+  {
+    id: 7,
+    title: "chair cushion",
+    price: "$15.99",
+    originalPrice: "$25.99",
+    discount: "38% OFF",
+    image: chairCushion,
+  },
+  {
+    id: 8,
+    title: "laptop stand",
+    price: "$15.99",
+    originalPrice: "$25.99",
+    discount: "38% OFF",
+    image: laptopStand,
+  },
+  {
+    id: 9,
+    title: "drawing tablet",
+    price: "$15.99",
+    originalPrice: "$25.99",
+    discount: "38% OFF",
+    image: drawingTablet,
+  },
+  {
+    id: 10,
+    title: "USB TO LAN maker",
+    price: "$15.99",
+    originalPrice: "$25.99",
+    discount: "38% OFF",
+    image: usb_lan_maker,
+  },
+  {
+    id: 11,
+    title: "Gardner sheer",
+    price: "$15.99",
+    originalPrice: "$25.99",
+    discount: "38% OFF",
+    image: gardnerSheer,
+  },
+];
+
+export const accountProducts = [
+  {
+    id: 1,
+    title: "Samsung 108 cm (43 inches) 4K Ultra HD tv",
+    price: "602.72",
+    rating: 4.2,
+    image: account_product,
+    off: 999.0,
+    onExclusiveDiscount: true,
+  },
+  {
+    id: 2,
+    title: "Tcl 101 cm (40 incehs ) Metallic Bezel-less Full",
+    price: "199.99",
+    rating: 3.0,
+    image: account_product,
+    off: 1234,
+    onExclusiveDiscount: true,
+  },
+  {
+    id: 3,
+    title: "Samsung 108 cm (43 inches) 4K Ultra HD tv",
+    price: "299.99",
+    rating: 4.0,
+    image: account_product,
+    off: 999.0,
+    onExclusiveDiscount: true,
+  },
+  {
+    id: 4,
+    title: "Samsung 108 cm (43 inches) 4K Ultra HD tv",
+    price: "299.99",
+    rating: 2,
+    image: account_product,
+    off: 999.0,
+    onExclusiveDiscount: true,
+  },
+  {
+    id: 5,
+    title: "Samsung 108 cm (43 inches) 4K Ultra HD tv",
+    price: "89.99",
+    rating: 5.0,
+    image: account_product,
+    off: 999.0,
+    onExclusiveDiscount: false,
+  },
+  {
+    id: 6,
+    title: "Samsung 108 cm (43 inches) 4K Ultra HD tv",
+    price: "199.99",
+    rating: 5.0,
+    image: account_product,
+    off: 1723,
+    onExclusiveDiscount: true,
+  },
+  {
+    id: 7,
+    title: "Samsung 108 cm (43 inches) 4K Ultra HD tv",
+    price: "299.99",
+    rating: 5.0,
+    image: account_product,
+    off: 999.0,
+    onExclusiveDiscount: true,
+  },
+];
+
+export const accountReviews = [
+  {
+    id: 1,
+    name: "Oliver Smith",
+    rating: 5,
+    userImage: require("../../assets/images/emily_Johnson.png"),
+    date: "March 26, 2025",
+    title: "Outstanding Visuals",
+    desc: "The picture quality is exceptional, with vibrant colors and sharp details that make every scene come alive.I noticed that the interface can be slightly laggy at times. The inclusion of multiple HDMI ports makes connecting external devices convenient. Overall, a solid choice for the price.",
+    likes: 231,
+    dislikes: 4,
+    images: [
+      require("../../assets/images/reviews1.jpg"),
+      require("../../assets/images/reviews2.jpg"),
+    ],
+  },
+  {
+    id: 2,
+    name: "Oliver Smith",
+    rating: 5,
+    userImage: require("../../assets/images/emily_Johnson.png"),
+    date: "March 26, 2025",
+    title: "Outstanding Visuals",
+    desc: "The picture quality is exceptional, with vibrant colors and sharp details that make every scene come alive.I noticed that the interface can be slightly laggy at times. The inclusion of multiple HDMI ports makes connecting external devices convenient. Overall, a solid choice for the price.",
+    likes: 231,
+    dislikes: 4,
+    images: [],
+  },
+  {
+    id: 3,
+    name: "Emily Johnson",
+    rating: 3,
+    userImage: require("../../assets/images/JamesWilliams.png"),
+    date: "March 20, 2025",
+    title: "Great Value",
+    desc: "This TV offers excellent features for its price point. Smart functionalities are user-friendly. The picture and sound quality are impressive. However, I noticed that the interface can be slightly laggy at times. The inclusion of multiple HDMI ports makes connecting external devices convenient. Overall, a solid choice for the price.",
+    likes: 231,
+    dislikes: 4,
+    images: [
+      require("../../assets/images/reviews1.jpg"),
+      require("../../assets/images/reviews2.jpg"),
+      require("../../assets/images/reviews3.jpg"),
+      require("../../assets/images/reviews4.jpg"),
+      require("../../assets/images/reviews5.jpg"),
+    ],
+  },
+];
+
+export const accountAbout = [
+  {
+    id: 1,
+    des: "Welcome to YourStore - your trusted destination for fashion, electronics, home essentials and more. Since day one, our mission has been simple: deliver quality products at fair prices with reliable service and fast delivery. With thousands of happy customers, we continue to grow as one of the most reliable shopping platforms online.",
+
+    des2: "Our wide collection includes fashion & lifestyle, gadgets, and home needs - all handpicked to give you the best experience. With secure payment options, hassle - free returns, and responsive customer care, YourStore is built around trust, convenience, and innovation.",
+
+    joinedDate: "January 2022",
+    url: "www.nikwalker.com",
+    views: "1,254,789",
+    products: "1,254",
+    reviews: 560,
+    followers: "85,000",
+    revenue: "150,000",
+    nation: "United kingdom",
   },
 ];

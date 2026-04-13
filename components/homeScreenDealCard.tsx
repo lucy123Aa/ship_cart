@@ -50,34 +50,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#1a1a1a",
     marginBottom: 4,
-    textAlign:'center'
-  },
-  priceContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    marginBottom: 8,
-  },
-  currentPrice: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: COLORS.darkPink,
-  },
-  originalPrice: {
-    fontSize: 12,
-    color: "#999",
-    textDecorationLine: "line-through",
-  },
-  addButton: {
-    backgroundColor: COLORS.darkPink,
-    paddingVertical: 10,
-    borderRadius: 8,
-    alignItems: "center",
-  },
-  addButtonText: {
-    color: "white",
-    fontSize: 12,
-    fontWeight: "600",
+    textAlign: "center",
   },
 });
 export default HomeScreenDealCard;
