@@ -13,13 +13,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import {
   AntDesign,
+  Entypo,
   EvilIcons,
   Feather,
   FontAwesome,
+  FontAwesome6,
   Foundation,
   Ionicons,
   MaterialCommunityIcons,
   MaterialIcons,
+  Octicons,
 } from "@expo/vector-icons";
 import {
   accountAbout,
@@ -251,7 +254,7 @@ export default function Account() {
                     des={item.des}
                     des2={item.des2}
                     joinedDate={item.joinedDate}
-                    url={item.url}
+                    label={item.label}
                     views={item.views}
                     products={item.products}
                     reviews={item.reviews}
@@ -360,22 +363,7 @@ const ProductCard = ({
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} key={id}>
       {onExclusiveDiscount && (
-        <Text
-          style={{
-            color: "white",
-            backgroundColor: "red",
-            borderRadius: 5,
-            position: "absolute",
-            right: 5,
-            top: 5,
-            paddingHorizontal: 5,
-            paddingVertical: 5,
-            zIndex: 2,
-            fontSize: 10,
-          }}
-        >
-          On Exclusive Discount
-        </Text>
+        <Text style={styles.onExclusiveDiscount}>On Exclusive Discount</Text>
       )}
       <Image source={image} style={styles.image} />
       <View style={styles.content}>
@@ -575,7 +563,7 @@ interface AboutProp {
   des?: string;
   des2?: string;
   joinedDate: string;
-  url: string;
+  label: string;
   views: string;
   products: string;
   followers: string;
@@ -588,7 +576,7 @@ const About = ({
   des,
   des2,
   joinedDate,
-  url,
+  label,
   views,
   products,
   followers,
@@ -597,13 +585,87 @@ const About = ({
   reviews,
 }: AboutProp) => {
   return (
-    <View>
-      <Text> {des} </Text>
-      <Text> {des2} </Text>
-      <View>
-        <Ionicons name="globe-outline" size={24} color="black" />
-        <Text>{url} </Text>
+    <>
+      <Text style={[styles.aboutText, { marginBottom: 15 }]}>{des}</Text>
+      <Text style={[styles.aboutText, { marginBottom: 15 }]}>{des2} </Text>
+      
+      <View style={{ gap: 15 }}>
+        <AboutBottom
+          Icon={MaterialCommunityIcons}
+          iconName="information-variant-circle-outline"
+          label="www.nikwalker.com"
+        />
+        <AboutBottom
+          Icon={Ionicons}
+          iconName="globe-outline"
+          label="www.nikwalker.com"
+        />
+
+        <AboutBottom
+          Icon={Octicons}
+          iconName="graph"
+          value={views}
+          label="Views"
+        />
+
+        <AboutBottom
+          Icon={MaterialCommunityIcons}
+          iconName="package-variant-closed"
+          label="Products"
+          value={products}
+        />
+
+        <AboutBottom
+          Icon={Feather}
+          iconName="star"
+          label="Reviews"
+          value={reviews}
+        />
+
+        <AboutBottom
+          Icon={FontAwesome6}
+          iconName="user"
+          label="Followers"
+          value={followers}
+        />
+
+        <AboutBottom
+          Icon={MaterialCommunityIcons}
+          iconName="piggy-bank-outline"
+          label="Revenue"
+          value={revenue}
+        />
+
+        <AboutBottom
+          Icon={Entypo}
+          iconName="globe"
+          label="Revenue"
+          value={revenue}
+        />
       </View>
+    </>
+  );
+};
+
+interface AboutBottom {
+  Icon: any;
+  iconName: string;
+  label: string;
+  value?: string | number;
+}
+
+const AboutBottom = ({ Icon, iconName, label, value }: AboutBottom) => {
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        gap: 2,
+        alignItems: "center",
+      }}
+    >
+      <Icon name={iconName} label={label} size={24} />
+      <Text style={styles.aboutText}>{value} </Text>
+      <Text style={styles.aboutText}>{label} </Text>
     </View>
   );
 };
@@ -746,7 +808,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     gap: 4,
     marginTop: 8,
-    paddingRight:10
+    paddingRight: 10,
   },
   priceSection: {
     flexDirection: "row",
@@ -866,5 +928,22 @@ const styles = StyleSheet.create({
     height: "100%",
     width: 0.9,
     backgroundColor: COLORS.border,
+  },
+
+  onExclusiveDiscount: {
+    color: "white",
+    backgroundColor: "red",
+    borderRadius: 5,
+    position: "absolute",
+    right: 5,
+    top: 5,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+    zIndex: 2,
+    fontSize: 10,
+  },
+  aboutText: {
+    fontSize: 16,
+    fontWeight: "normal",
   },
 });

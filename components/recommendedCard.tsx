@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginBottom: 8,
     color: "#333",
+    textTransform:'capitalize'
   },
   footer: {
     flexDirection: "row",

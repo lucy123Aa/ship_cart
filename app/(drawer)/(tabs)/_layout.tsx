@@ -44,6 +44,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <Search width={24} height={24} color={color} />
           ),
+          tabBarStyle: { display: "none" },
         }}
       />
       <Tabs.Screen
@@ -53,6 +54,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="compass" size={24} color={color} />
           ),
+          // tabBarStyle: { display: "none" },
         }}
       />
 
@@ -63,6 +65,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <Categories width={20} height={20} color={color} />
           ),
+          tabBarStyle: { display: "none" },
         }}
       />
       <Tabs.Screen
@@ -76,6 +79,7 @@ export default function TabLayout() {
               color={color}
             />
           ),
+          tabBarStyle: { display: "none" },
         }}
       />
     </Tabs>

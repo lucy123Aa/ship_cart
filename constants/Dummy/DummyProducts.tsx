@@ -256,7 +256,7 @@ export const categories = [
 export const recommendedItems = [
   {
     id: 1,
-    title: "Drawing Tablet for Kids, Chareable, No UV light Tablet",
+    title: "drawing Tablet for Kids, Chareable, No UV light Tablet",
     price: "602.72",
     rating: 1723,
     image: drawingTablet,
@@ -415,7 +415,7 @@ export const accountProducts = [
   },
   {
     id: 2,
-    title: "Tcl 101 cm (40 incehs ) Metallic Bezel-less Full",
+    title: "Tcl 101 cm (40 incehs ) Metallic Bezel-less Full HD Smart Android",
     price: "199.99",
     rating: 3.0,
     image: account_product,
@@ -525,12 +525,50 @@ export const accountAbout = [
     des2: "Our wide collection includes fashion & lifestyle, gadgets, and home needs - all handpicked to give you the best experience. With secure payment options, hassle - free returns, and responsive customer care, YourStore is built around trust, convenience, and innovation.",
 
     joinedDate: "January 2022",
-    url: "www.nikwalker.com",
+    label: "www.nikwalker.com",
     views: "1,254,789",
     products: "1,254",
     reviews: 560,
     followers: "85,000",
     revenue: "150,000",
     nation: "United kingdom",
+  },
+];
+
+export const DummyCartData = {
+  id: "1",
+  deliverTo: "nik walker",
+  address: "17 Waverley Crescent, Middleham ",
+
+  productImage: account_product,
+  price: 215.0,
+  off: 249.0,
+  seller: "tcl uk",
+  productName:
+    "Tcl 101 cm (40 incehs ) Metallic Bezel-less Full HD Smart Android",
+};
+
+export const DummyCartDataValues = [
+  {
+    id: 1,
+    label: "Item Total",
+    price: 215.0,
+    availableValues: "1",
+  },
+  {
+    id: 2,
+    label: "Discount",
+    price: 34.0,
+  },
+  {
+    id: 3,
+    label: "Platform fee",
+    price: 215.0,
+  },
+  {
+    id: 4,
+    label: "VAT",
+    price: 215.0,
+    availableValues: "20%",
   },
 ];

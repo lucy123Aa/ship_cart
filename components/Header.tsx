@@ -14,8 +14,10 @@ import { useNavigation } from "@react-navigation/native";
 
 import ShipCartLogo from "../assets/svg/shipCart_logo.svg";
 import Divider from "./Divider";
+import { useRouter } from "expo-router";
 
 function Header() {
+  const router = useRouter();
   const navigation = useNavigation();
   const scrollY = useRef(new Animated.Value(0)).current;
 
@@ -40,16 +42,22 @@ function Header() {
           </View>
         </TouchableOpacity>
         <View style={styles.headerRight}>
-          <TouchableOpacity style={styles.iconButton}>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => router.push("/cart")}
+          >
             <Feather name="shopping-cart" size={24} color="black" />
           </TouchableOpacity>
         </View>
       </View>
 
-      <View style={styles.searchSection}>
-        <View style={styles.searchBar}>
+      <TouchableOpacity
+        style={styles.searchSection}
+        onPress={() => router.push("/(drawer)/(tabs)/search")}
+      >
+        <View style={[styles.searchBar]}>
           <Feather name="search" size={20} color="#6a6868" />
-          <TextInput
+          {/* <TextInput
             placeholder="Search your item here"
             placeholderTextColor="#999"
             style={styles.searchInput}
@@ -60,9 +68,11 @@ function Header() {
             <TouchableOpacity onPress={() => setSearchText("")}>
               <Ionicons name="close-circle" size={20} color="#999" />
             </TouchableOpacity>
-          )}
+          )} */}
+
+          <Text style={{ color: "#999" }}>Search your item herez</Text>
         </View>
-      </View>
+      </TouchableOpacity>
 
       <Divider />
       <View style={styles.deliveryItem}>
@@ -112,6 +122,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     height: 40,
     gap: 8,
+    // marginBottom: 8,
   },
   searchInput: {
     flex: 1,
